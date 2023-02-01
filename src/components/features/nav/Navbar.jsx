@@ -39,7 +39,10 @@ function Navbar() {
               <MDBNavbarLink href="/aboutMe">About Me</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href="/my/Projects">My Projects</MDBNavbarLink>
+              <MDBNavbarLink href="/my/projects">My Projects</MDBNavbarLink>
+            </MDBNavbarItem>
+            <MDBNavbarItem>
+              <MDBNavbarLink href="/my/Skills">My Skills</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
               <MDBNavbarLink href="/contact">Contact</MDBNavbarLink>
