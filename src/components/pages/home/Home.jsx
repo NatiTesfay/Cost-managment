@@ -1,8 +1,14 @@
+import { MDBContainer } from "mdb-react-ui-kit";
 import React from "react";
+import HomeUpper from "../../features/card/HomeUpper";
+import AllProjects from "../../features/card/AllProjects";
 
 function Home() {
   return (
-    <div><h1>Contact</h1></div>
+    <MDBContainer className=" d-flex justify-content-center">
+      <HomeUpper />
+      <AllProjects />
+    </MDBContainer>
   );
 }
 

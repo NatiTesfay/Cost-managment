@@ -12,12 +12,12 @@ import {
 } from "mdb-react-ui-kit";
 
 function Navbar() {
-    const[secondColor, setSecondColor] = React.useState(false);
+  const [secondColor, setSecondColor] = React.useState(false);
 
   return (
     <MDBNavbar expand="xl" dark bgColor="dark">
       <MDBContainer fluid>
-        <MDBNavbarBrand href="#">Portfolio</MDBNavbarBrand>
+        <MDBNavbarBrand href="/MyProjects">Portfolio</MDBNavbarBrand>
         <MDBNavbarToggler
           type="button"
           data-target="#navbarColor02"
@@ -31,21 +31,18 @@ function Navbar() {
         <MDBCollapse show={secondColor} navbar id="navbarColor02">
           <MDBNavbarNav className="me-auto mb-6 mb-lg-0">
             <MDBNavbarItem className="active">
-              <MDBNavbarLink aria-current="page" href="home">
+              <MDBNavbarLink aria-current="page" href="/home">
                 Home
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href="/aboutMe">About Me</MDBNavbarLink>
+              <MDBNavbarLink href="/MyProjects">My Projects</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href="/my/projects">My Projects</MDBNavbarLink>
+              <MDBNavbarLink href="/Skills">My Skills</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href="/my/Skills">My Skills</MDBNavbarLink>
-            </MDBNavbarItem>
-            <MDBNavbarItem>
-              <MDBNavbarLink href="/contact">Contact</MDBNavbarLink>
+              <MDBNavbarLink href="/Contact">Contact</MDBNavbarLink>
             </MDBNavbarItem>
           </MDBNavbarNav>
         </MDBCollapse>
