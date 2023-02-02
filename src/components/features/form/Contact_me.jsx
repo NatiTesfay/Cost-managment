@@ -7,8 +7,14 @@ import {
   MDBBtn,
   MDBIcon
 } from 'mdb-react-ui-kit';
+import { useState , useEffect } from 'react';
+import UseLocalStorage from "../form/UseLocalStorage"
 
  function Contact_me() {
+
+  const [email, setEmail] = useState("");
+  
+
   return (
     <form className='m-4 p-3'>
       <MDBInput className='mb-4' type='email' id='form2Example1' label='Email address' />
