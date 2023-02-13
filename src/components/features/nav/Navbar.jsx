@@ -17,7 +17,7 @@ function Navbar() {
   return (
     <MDBNavbar expand="xl" dark bgColor="dark">
       <MDBContainer fluid>
-        <MDBNavbarBrand href="/MyProjects">Portfolio</MDBNavbarBrand>
+        <MDBNavbarBrand href="/MyProjects">Cost Managment App</MDBNavbarBrand>
         <MDBNavbarToggler
           type="button"
           data-target="#navbarColor02"
@@ -36,13 +36,10 @@ function Navbar() {
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href="/MyProjects">My Projects</MDBNavbarLink>
+              <MDBNavbarLink href="/NewItems">Add New Items</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href="/Skills">My Skills</MDBNavbarLink>
-            </MDBNavbarItem>
-            <MDBNavbarItem>
-              <MDBNavbarLink href="/Contact">Contact</MDBNavbarLink>
+              <MDBNavbarLink href="/AllReports">All Reports</MDBNavbarLink>
             </MDBNavbarItem>
           </MDBNavbarNav>
         </MDBCollapse>

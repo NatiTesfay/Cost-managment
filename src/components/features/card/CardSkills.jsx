@@ -15,7 +15,7 @@ function CardSkills() {
     <>
       {AllSkills.map((skill, i) => {
         return (
-          <MDBRow className='p-4 m-2'>
+          <MDBRow className='d-flex justify-content-center mt-3'>
           <MDBCol>
             <MDBCard>
               <MDBCardBody>
