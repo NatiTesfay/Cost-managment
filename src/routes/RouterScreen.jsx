@@ -9,8 +9,8 @@ function RoutersScreen() {
   return (
     <Routes>
       <Route path="/home" element={<Home />} />
-      <Route path="NewItems" element={<NewItems />} />
-      <Route path="AllReports" element={<AllReports />} />
+      <Route path="/NewItems" element={<NewItems />} />
+      <Route path="/AllReports" element={<AllReports />} />
     </Routes>
   );
 }

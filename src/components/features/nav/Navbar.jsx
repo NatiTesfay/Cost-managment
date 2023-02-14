@@ -17,7 +17,7 @@ function Navbar() {
   return (
     <MDBNavbar expand="xl" dark bgColor="dark">
       <MDBContainer fluid>
-        <MDBNavbarBrand href="/MyProjects">Cost Managment App</MDBNavbarBrand>
+        <MDBNavbarBrand href="/home">Cost Managment App</MDBNavbarBrand>
         <MDBNavbarToggler
           type="button"
           data-target="#navbarColor02"
