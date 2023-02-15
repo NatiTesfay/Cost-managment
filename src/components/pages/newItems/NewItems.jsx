@@ -5,7 +5,6 @@ import {
   MDBInput,
   MDBBtn,
   MDBContainer,
-  MDBValidation,
   MDBTextArea,
   MDBModal,
   MDBModalDialog,
@@ -40,7 +39,7 @@ function NewItems() {
         vacations: "vacations",
       },
     ],
-    data: "",
+    date: "",
 
     description: "",
   });
@@ -50,7 +49,9 @@ function NewItems() {
     //and then the state get storageData storageData with distracting data and then we get more easily the data
     const storageData = JSON.parse(localStorage.getItem("user")) || [];
     setFormData({ ...formData, ...storageData });
-  }, [formData]);
+    localStorage.clear(formData);
+    
+  }, []);
 
   //function that will run when the user clicks on the button
   //get the data from the input and save it to local storage
@@ -68,9 +69,7 @@ function NewItems() {
     //e.preventDefault() will prevent the form from being submitted on all inputs the is generating
     // JSON.stringify(formData) = JSON.stringify turn the updated state the json string
   };
-  const localStorageData = [];
-  localStorageData.push(formData);
-
+ 
 
   //arrow function that checks when user press the btn if the state of showPopUp is true
   //if it is true, it will run the function and return popup
@@ -90,7 +89,6 @@ function NewItems() {
                 onChange={handleInputChange}
               />
             </MDBCol>
-            <MDBValidation className="row g-3">
               <MDBCol>
                 <MDBInput
                   id="form6Example1"
@@ -101,7 +99,16 @@ function NewItems() {
                   onChange={handleInputChange}
                 />
               </MDBCol>
-            </MDBValidation>
+              <MDBCol>
+                <MDBInput
+                  id="form6Example1"
+                  type="date"
+                  label="date"
+                  name="date"
+                  value={formData.date || ""}
+                  onChange={handleInputChange}
+                />
+              </MDBCol>
           </MDBRow>
           <MDBRow className="mb-4">
             <select
