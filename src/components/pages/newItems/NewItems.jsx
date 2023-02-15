@@ -17,7 +17,6 @@ import {
 } from "mdb-react-ui-kit";
 //import modules from "react-ui-kit/dist/modules";
 
-
 function NewItems() {
   //state change when user clicks on the button and turn to true
   //when state changes to true, it will run the function and return popup
@@ -47,17 +46,17 @@ function NewItems() {
   });
 
   useEffect(() => {
-    //storedData hold the data from local storage
-    //and then the state get storedData storedData with distracting data and then we get more easily the data
-    const storedData = JSON.parse(localStorage.getItem("user")) || {};
-    setFormData({ ...formData, ...storedData });
-  }, []);
+    //storageData hold the data from local storage
+    //and then the state get storageData storageData with distracting data and then we get more easily the data
+    const storageData = JSON.parse(localStorage.getItem("user")) || [];
+    setFormData({ ...formData, ...storageData });
+  }, [formData]);
 
   //function that will run when the user clicks on the button
   //get the data from the input and save it to local storage
-//the state is updated every time the user clicks on the button
-//e.target.name is the name of the input
-//e.target.value is the value of the input
+  //the state is updated every time the user clicks on the button
+  //e.target.name is the name of the input
+  //e.target.value is the value of the input
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -68,8 +67,10 @@ function NewItems() {
     // handleSubmit get event from the form and save it to local storage
     //e.preventDefault() will prevent the form from being submitted on all inputs the is generating
     // JSON.stringify(formData) = JSON.stringify turn the updated state the json string
-
   };
+  const localStorageData = [];
+  localStorageData.push(formData);
+
 
   //arrow function that checks when user press the btn if the state of showPopUp is true
   //if it is true, it will run the function and return popup
@@ -147,7 +148,6 @@ function NewItems() {
               </MDBModalContent>
             </MDBModalDialog>
           </MDBModal>
-
         </MDBContainer>
       </form>
     </>
@@ -158,4 +158,3 @@ export default NewItems;
 
 //this component build to let the user to add new item and save it to local storage
 //after user enter data the component will be used to show the popup when the user click on the button
-

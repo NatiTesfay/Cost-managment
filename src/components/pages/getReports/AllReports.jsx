@@ -1,10 +1,15 @@
 import { MDBContainer } from "mdb-react-ui-kit";
 import React from "react";
+import MonthlyReport from "../../features/buttons/MonthlyReport";
+import YearlyReport from "../../features/buttons/YearlyReport";
+
+
 
 function Get_report() {
   return (
-  <MDBContainer>
-    <h1 className="p-4 m-4 d-flex justify-content-center">Get report</h1>
+  <MDBContainer className="d-flex justify-content-evenly p-5 " >
+    <MonthlyReport/>
+    <YearlyReport/>
   </MDBContainer>
   );
 }
