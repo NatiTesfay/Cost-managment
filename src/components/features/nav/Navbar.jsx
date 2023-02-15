@@ -48,3 +48,25 @@ function Navbar() {
   );
 }
 export default Navbar;
+
+
+
+
+// const [formData, setFormData] = useState({});
+
+// useEffect(() => {
+//   const storedData = JSON.parse(localStorage.getItem('formData'));
+//   if (storedData) {
+//     setFormData(storedData);
+//   }
+// }, []);
+
+// const handleChange = event => {
+//   setFormData({ ...formData, [event.target.name]: event.target.value });
+// };
+
+// const handleSubmit = event => {
+//   event.preventDefault();
+//   localStorage.setItem('formData', JSON.stringify(formData));
+// };
+// <input type="text" name="username" onChange={handleChange} value={formData.username || ''} placeholder="username" />
