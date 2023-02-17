@@ -15,7 +15,7 @@ import {
 function MonthlyReport() {
   const [showPopUp, setShowPopUp] = useState(false);
 
-  const [showMonth, setShowMonth] = useState({
+  const [showData, setShowDate] = useState({
     months: [
       { January: "January" },
       { February: "February" },
@@ -29,8 +29,6 @@ function MonthlyReport() {
       { November: "November" },
       { December: "December" },
     ],
-  });
-  const [showYear, setShowYear] = useState({
     years: [
       { year1: 2023 },
       { year2: 2022 },
@@ -42,19 +40,16 @@ function MonthlyReport() {
       { year8: 2016 },
       { year9: 2015 },
       { year10: 2014 },
-    ],
+    ]
   });
+
 
   useEffect(() => {
     //storageDataMonth hold the data from local storage
     //and then the state get storageDataMonth storageDataMonth with distracting data and then we get more easily the data
     const storageDataMonth = JSON.parse(localStorage.getItem("userData")) || [];
-    setShowMonth({ ...showMonth, ...storageDataMonth });
-    
-    const storageDataYear = JSON.parse(localStorage.getItem("userData")) || [];
-    setShowYear({ ...showYear, ...storageDataYear });
-    // localStorage.clear(showMonth);
-  }, []);
+    setShowDate({ ...showData, ...storageDataMonth });
+  });
 
   //function that will run when the user clicks on the button
   //get the data from the input and save it to local storage
@@ -62,23 +57,19 @@ function MonthlyReport() {
   //e.target.name is the name of the input
   //e.target.value is the value of the input
   const handleInputChange = (e) => {
-    setShowMonth({
-      ...showMonth,
+    setShowDate({
+      ...showData,
       [e.target.name]: e.target.value,
     });
-    setShowYear({
-      ...showYear,
-      [e.target.name]: e.target.value,
-    });
+
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem("userData", JSON.stringify(showMonth));
-    localStorage.setItem("userData", JSON.stringify(showYear));
+    localStorage.setItem("userData", JSON.stringify(showData));
     // handleSubmit get event from the form and save it to local storage
     //e.preventDefault() will prevent the form from being submitted on all inputs the is generating
-    // JSON.stringify(showMonth) = JSON.stringify turn the updated state the json string
+    // JSON.stringify(showData) = JSON.stringify turn the updated state the json string
   };
 
   const showPopup = () => setShowPopUp(!showPopUp);
@@ -102,7 +93,7 @@ function MonthlyReport() {
                 id="form6Example1"
                 label="monthCategory"
                 name="monthCategory"
-                value={showMonth.months || ""}
+                value={showData.months || ""}
                 onChange={handleInputChange}
               >
                 <option value="January">January</option>
@@ -122,7 +113,7 @@ function MonthlyReport() {
                 id="form6Example1"
                 label="yearCategory"
                 name="yearCategory"
-                value={showYear.years || ""}
+                value={showData.years || ""}
                 onChange={handleInputChange}
               >
                 <option value="2023">2023</option>
