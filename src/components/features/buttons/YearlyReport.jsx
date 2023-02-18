@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 //import modules from "react-ui-kit/dist/modules";
 
 function YearlyReport() {
-  const [showPopUp, setShowPopUp] = useState(false);
   const [yearlyReport, setYearlyReport] = useState({yearCategory: "",});
   const [data, setData] = useState([]);
 
@@ -42,7 +41,6 @@ function YearlyReport() {
   //arrow function that checks when user press the btn if the state of showPopUp is true
   //if it is true, it will run the function and return popup
 
-  const showPopup = () => setShowPopUp(!showPopUp);
 
   return (
     <form>
