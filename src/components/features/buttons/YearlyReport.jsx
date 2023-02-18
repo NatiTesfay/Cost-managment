@@ -3,24 +3,22 @@ import React, { useState, useEffect } from "react";
 //import modules from "react-ui-kit/dist/modules";
 
 function YearlyReport() {
-
   const [showPopUp, setShowPopUp] = useState(false);
-
-  const [yearlyReport, setYearlyReport] = useState({
-    yearCategory: "",
-  });
+  const [yearlyReport, setYearlyReport] = useState({yearCategory: "",});
   const [data, setData] = useState([]);
 
+  // get yearly report data after component render
   useEffect(() => {
     const storedData = localStorage.getItem("YearlyReport:");
-
-
     if (storedData) {
+      // return updated data
       setData(JSON.parse(storedData));
     }
   }, []);
   // localStorage.clear();
 
+  // target the year category by key name 
+  // target the category with value 
   function handleChange(event) {
     const { name, value } = event.target;
     setYearlyReport((prevYearlyReport) => ({
@@ -28,7 +26,7 @@ function YearlyReport() {
       [name]: value,
     }));
   }
-
+// yearly report distraction to get existing yearly report data
   function handleAdd() {
     const newEntry = { ...yearlyReport };
     setData((prevData) => [...prevData, newEntry]);
@@ -36,6 +34,7 @@ function YearlyReport() {
       yearCategory: "",
     });
 
+    //const updatedData hold the new yearly report data
     const updatedData = [...data, newEntry];
     localStorage.setItem("YearlyReport:", JSON.stringify(updatedData));
   }
@@ -68,8 +67,7 @@ function YearlyReport() {
         <option value="2013">2013</option>
         <option value="2012">2012</option>
       </select>
-      <button onClick={handleAdd}>Add
-      </button>
+      <button onClick={handleAdd}>Add</button>
     </form>
   );
 }
