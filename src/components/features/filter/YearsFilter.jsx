@@ -1,21 +1,30 @@
-// import React, { useEffect, useState } from 'react';
+// import { useState, useEffect, useCallback } from 'react';
 
-// export default function YearFilter() {
-    
-//   const setup =  ["yearCategory"]
-//   const yearCategory = [
-//     { year1: 2023 },
-//     { year2: 2022 },
-//     { year3: 2021 },
-//     { year4: 2020 },
-//     { year5: 2019 },
-//     { year6: 2018 },
-//     { year7: 2017 },
-//     { year8: 2016 },
-//     { year9: 2015 },
-//     { year10: 2014 },
-//   ];
+// function YearsFilter(date, interval) {
+//   const [filteredEvents, setFilteredEvents] = useState([]);
 
-//   const data = [[...yearCategory],...items?.slice(0,7).map((obj,i )=> [obj=obj.yearCategory.country, population[i][i]])];
-//   return <Chart chartType="GeoChart"  options={options} data={data} />
-// };
+//   const filterEvents = useCallback((events) => {
+//     const filteredEvents = filterEventsByDate(events, date, interval);
+//     setFilteredEvents(filteredEvents);
+//   }, [date, interval]);
+
+//   useEffect(() => {
+//     const events = JSON.parse(localStorage.getItem('events'));
+//     filterEvents(events);
+//   }, [filterEvents]);
+
+//   return filteredEvents;
+// }
+
+// const ParentComponent = ()=>  {
+//     const date = new Date('2022-12-31');
+//     const interval = 1000 * 60 * 60 * 24 * 30 * 12; // one year in milliseconds
+//     const filteredEvents = useFilteredEvents(date, interval);
+  
+//     return (
+//       <div>
+//         <ChildComponent events={filteredEvents} />
+//       </div>
+//     );
+//   }
+  

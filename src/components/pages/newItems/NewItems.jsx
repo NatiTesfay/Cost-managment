@@ -16,6 +16,7 @@ import {
 } from "mdb-react-ui-kit";
 //import modules from "react-ui-kit/dist/modules";
 
+
 function NewItems() {
   //state change when user clicks on the button and turn to true
   //when state changes to true, it will run the function and return popup
@@ -25,51 +26,41 @@ function NewItems() {
   const [formData, setFormData] = useState({
     itemName: "",
     price: "",
-    category: [
-      {
-        fashion: "fashion",
-      },
-      {
-        food: "food",
-      },
-      {
-        sport: "sport",
-      },
-      {
-        vacations: "vacations",
-      },
-    ],
+    category: "",
     date: "",
-
     description: "",
   });
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    //storageData hold the data from local storage
-    //and then the state get storageData storageData with distracting data and then we get more easily the data
-    const storageData = JSON.parse(localStorage.getItem("user")) || [];
-    setFormData({ ...formData, ...storageData });
-    localStorage.clear(formData);
-    
+    const storedData = localStorage.getItem('NewItems:');
+
+    if (storedData) {
+      setData(JSON.parse(storedData));
+    }
   }, []);
+  // localStorage.clear();
 
-  //function that will run when the user clicks on the button
-  //get the data from the input and save it to local storage
-  //the state is updated every time the user clicks on the button
-  //e.target.name is the name of the input
-  //e.target.value is the value of the input
-  const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    localStorage.setItem("user", JSON.stringify(formData));
-    // handleSubmit get event from the form and save it to local storage
-    //e.preventDefault() will prevent the form from being submitted on all inputs the is generating
-    // JSON.stringify(formData) = JSON.stringify turn the updated state the json string
-  };
- 
+  function handleAdd() {
+    const newEntry = { ...formData };
+    setData(prevData => [...prevData, newEntry]);
+    setFormData({
+      itemName: "",
+      price: "",
+      category: "",
+      date: "",
+      description: "",
+    });
+
+    const updatedData = [...data, newEntry];
+    localStorage.setItem('NewItems:', JSON.stringify(updatedData));
+  }
+
 
   //arrow function that checks when user press the btn if the state of showPopUp is true
   //if it is true, it will run the function and return popup
@@ -77,16 +68,14 @@ function NewItems() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleAdd} >
         <MDBContainer className="p-5">
           <MDBRow className="mb-4">
             <MDBCol>
               <MDBInput
                 id="form6Example1"
                 label="Item Name"
-                name="itemName"
-                value={formData.itemName || ""}
-                onChange={handleInputChange}
+                name="itemName" value={formData.itemName} onChange={handleChange}
               />
             </MDBCol>
               <MDBCol>
@@ -94,9 +83,8 @@ function NewItems() {
                   id="form6Example1"
                   type="number"
                   label="price"
-                  name="price"
-                  value={formData.price || ""}
-                  onChange={handleInputChange}
+                  name="price" value={formData.price} onChange={handleChange}
+
                 />
               </MDBCol>
               <MDBCol>
@@ -104,9 +92,7 @@ function NewItems() {
                   id="form6Example1"
                   type="date"
                   label="date"
-                  name="date"
-                  value={formData.date || ""}
-                  onChange={handleInputChange}
+                  name="date" value={formData.date} onChange={handleChange}
                 />
               </MDBCol>
           </MDBRow>
@@ -114,10 +100,9 @@ function NewItems() {
             <select
               id="form6Example1"
               label="category"
-              name="category"
-              value={formData.category || ""}
-              onChange={handleInputChange}
+              name="category" value={formData.category} onChange={handleChange}
             >
+              <option value="1">Please Select an Option</option>
               <option value="fashion">fashion</option>
               <option value="food">food</option>
               <option value="sport">sport</option>
@@ -128,12 +113,10 @@ function NewItems() {
             <MDBTextArea
               id="form6Example1"
               label="description"
-              name="description"
-              value={formData.description || ""}
-              onChange={handleInputChange}
+              name="description" value={formData.description} onChange={handleChange}
+
             />
           </MDBRow>
-
           <MDBBtn onClick={showPopup}>Add Item</MDBBtn>
           <MDBModal show={showPopUp} setShow={setShowPopUp} tabIndex="-1">
             <MDBModalDialog>

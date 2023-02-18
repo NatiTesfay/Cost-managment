@@ -1,121 +1,68 @@
 import React, { useState, useEffect } from "react";
-import {
-  MDBBtn,
-  MDBRow,
-  MDBModal,
-  MDBModalDialog,
-  MDBModalContent,
-  MDBModalHeader,
-  MDBModalTitle,
-  MDBModalBody,
-  MDBModalFooter,
-} from "mdb-react-ui-kit";
+
 //import modules from "react-ui-kit/dist/modules";
 
-function MonthlyReport() {
-  const [showPopUp, setShowPopUp] = useState(false);
+function MonthlyReport(props) {
 
-  const [showData, setShowDate] = useState({
-    months: [
-      { January: "January" },
-      { February: "February" },
-      { March: "March" },
-      { April: "April" },
-      { May: "May" },
-      { June: "June" },
-      { July: "July" },
-      { August: "August" },
-      { October: "October " },
-      { November: "November" },
-      { December: "December" },
-    ],
-    years: [
-      { year1: 2023 },
-      { year2: 2022 },
-      { year3: 2021 },
-      { year4: 2020 },
-      { year5: 2019 },
-      { year6: 2018 },
-      { year7: 2017 },
-      { year8: 2016 },
-      { year9: 2015 },
-      { year10: 2014 },
-    ]
+  // const [showPopUp, setShowPopUp] = useState(false);
+
+  const [monthlyReport, setMonthlyReport] = useState({
+    monthCategory : "",
+    yearCategory : "",
   });
+  const [data, setData] = useState([]);
 
 
   useEffect(() => {
-    //storageDataMonth hold the data from local storage
-    //and then the state get storageDataMonth storageDataMonth with distracting data and then we get more easily the data
-    const storageDataMonth = JSON.parse(localStorage.getItem("userData")) || [];
-    setShowDate({ ...showData, ...storageDataMonth });
-  });
+    const storedData = localStorage.getItem('MonthlyReport:');
 
-  //function that will run when the user clicks on the button
-  //get the data from the input and save it to local storage
-  //the state is updated every time the user clicks on the button
-  //e.target.name is the name of the input
-  //e.target.value is the value of the input
-  const handleInputChange = (e) => {
-    setShowDate({
-      ...showData,
-      [e.target.name]: e.target.value,
+
+
+    if (storedData) {
+      setData(JSON.parse(storedData));
+    }
+  }, []);
+  // localStorage.clear();
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setMonthlyReport(prevmonthlyReport => ({ ...prevmonthlyReport, [name]: value }));
+  }
+
+  function handleAdd() {
+    const newEntry = { ...monthlyReport };
+    setData(prevData => [...prevData, newEntry]);
+    setMonthlyReport({
+      yearCategory : "",
+      monthCategory:""
+      ,
     });
 
-  };
+    const updatedData = [...data, newEntry];
+    localStorage.setItem('MonthlyReport:', JSON.stringify(updatedData));
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    localStorage.setItem("userData", JSON.stringify(showData));
-    // handleSubmit get event from the form and save it to local storage
-    //e.preventDefault() will prevent the form from being submitted on all inputs the is generating
-    // JSON.stringify(showData) = JSON.stringify turn the updated state the json string
-  };
+  useEffect(() => {
+    localStorage.getItem("MonthlyReport:")
 
-  const showPopup = () => setShowPopUp(!showPopUp);
+  })
+  
+
+
+  //arrow function that checks when user press the btn if the state of showPopUp is true
+  //if it is true, it will run the function and return popup
+
+  // const showPopup = () => setShowPopUp(!showPopUp);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <MDBBtn onClick={showPopup}>Monthly Report</MDBBtn>
-      <MDBModal show={showPopUp} setShow={setShowPopUp} tabIndex="-1">
-        <MDBModalDialog>
-          <MDBModalContent>
-            <MDBModalHeader>
-              <MDBModalTitle>Pick Year</MDBModalTitle>
-              <MDBBtn
-                className="btn-close"
-                color="none"
-                onClick={showPopup}
-              ></MDBBtn>
-            </MDBModalHeader>
-            <MDBRow className="mb-4">
-              <select
-                id="form6Example1"
-                label="monthCategory"
-                name="monthCategory"
-                value={showData.months || ""}
-                onChange={handleInputChange}
-              >
-                <option value="January">January</option>
-                <option value="February">February</option>
-                <option value="March">March</option>
-                <option value="April">April</option>
-                <option value="May">May</option>
-                <option value="June">June</option>
-                <option value="July">July</option>
-                <option value="August">August</option>
-                <option value="September">September</option>
-                <option value="October">October</option>
-                <option value="November">November</option>
-                <option value="December">vacations</option>
-              </select>
+    <form >
               <select
                 id="form6Example1"
                 label="yearCategory"
-                name="yearCategory"
-                value={showData.years || ""}
-                onChange={handleInputChange}
+                name="yearCategory" value={monthlyReport.yearCategory} onChange={handleChange}
+
               >
+                <option value="2023">Choose Year</option>
                 <option value="2023">2023</option>
                 <option value="2022">2022</option>
                 <option value="2021">2021</option>
@@ -129,17 +76,29 @@ function MonthlyReport() {
                 <option value="2013">2013</option>
                 <option value="2012">2012</option>
               </select>
-            </MDBRow>
-            <MDBModalBody> Month added successfully!</MDBModalBody>
-            <MDBModalFooter>
-              <MDBBtn color="secondary" onClick={showPopup}>
-                Close
-              </MDBBtn>
-            </MDBModalFooter>
-          </MDBModalContent>
-        </MDBModalDialog>
-      </MDBModal>
+              <select
+                id="form6Example1"
+                label="monthCategory"
+                name="monthCategory" value={monthlyReport.monthCategory} onChange={handleChange}
+
+              >
+                <option value="">Choose Month</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">June</option>
+                <option value="8">August</option>
+                <option value="9">August</option>
+                <option value="10">August</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+              </select>
+              <button onClick={handleAdd} >Add</button>
     </form>
   );
 }
+
 export default MonthlyReport;
