@@ -1,30 +1,38 @@
-// import { useState, useEffect, useCallback } from 'react';
+// import { useContext, useState } from "react";
 
-// function YearsFilter(date, interval) {
-//   const [filteredEvents, setFilteredEvents] = useState([]);
 
-//   const filterEvents = useCallback((events) => {
-//     const filteredEvents = filterEventsByDate(events, date, interval);
-//     setFilteredEvents(filteredEvents);
-//   }, [date, interval]);
-
-//   useEffect(() => {
-//     const events = JSON.parse(localStorage.getItem('events'));
-//     filterEvents(events);
-//   }, [filterEvents]);
-
-//   return filteredEvents;
-// }
-
-// const ParentComponent = ()=>  {
-//     const date = new Date('2022-12-31');
-//     const interval = 1000 * 60 * 60 * 24 * 30 * 12; // one year in milliseconds
-//     const filteredEvents = useFilteredEvents(date, interval);
+// function YearsFilter({ item }) {
+//     const { data } = useContext(DataContext);
+//     const [selectedDate, setSelectedDate] = useState(null);
+  
+//     const filteredData = data.filter((item) => {
+//       const itemDate = new Date(item.date);
+//       return (
+//         selectedDate &&
+//         itemDate.getFullYear() === selectedDate.getFullYear() &&
+//         itemDate.getMonth() === selectedDate.getMonth() &&
+//         itemDate.getDate() === selectedDate.getDate()
+//       );
+//     });
+  
+//     function handleDateChange(date) {
+//       setSelectedDate(date);
+//     }
   
 //     return (
 //       <div>
-//         <ChildComponent events={filteredEvents} />
+//         <DatePicker selected={selectedDate} onChange={handleDateChange} />
+//         <h2>Report</h2>
+//         {selectedDate && (
+//           <p>Showing results for {selectedDate.toDateString()}</p>
+//         )}
+//         <ul>
+//           {filteredData.map((item) => (
+//             <li key={item.id}>{item.name}</li>
+//           ))}
+//         </ul>
 //       </div>
 //     );
-//   }
-  
+//           }
+
+// export default YearsFilter;

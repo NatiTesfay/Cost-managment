@@ -4,6 +4,7 @@ import MonthlyReport from "../../features/buttons/MonthlyReport";
 import YearlyReport from "../../features/buttons/YearlyReport";
 
 function AllReports() {
+
   return (
     
     <MDBContainer className="d-flex justify-content-evenly p-5 ">
