@@ -12,52 +12,42 @@ import {
 } from "mdb-react-ui-kit";
 //import modules from "react-ui-kit/dist/modules";
 
-
-
-
-function YearlyReport() {
+function YearlyReport(filter) {
   const [yearlyReport, setYearlyReport] = useState({
     yearData: [{ yearCategory: "" }],
   });
   const [data, setData] = useState([]);
   const [showPopUp, setShowPopUp] = useState(false);
 
+
   // get yearly report data after component render
   useEffect(() => {
-    const storedData = localStorage.getItem("NewItems:");
+    const storedData = localStorage.getItem("YearlyReportData");
+
     if (storedData) {
       // return updated data
       setData(JSON.parse(storedData));
     }
   }, []);
-  // localStorage.clear();
 
-  // target the year category by key name
-  // target the category with value
+  
+
   function handleChange(event) {
     const { name, value } = event.target;
     setYearlyReport((prevYearlyReport) => ({
       ...prevYearlyReport,
       [name]: value,
     }));
-  }
-  // yearly report distraction to get existing yearly report data
-  function handleAdd() {
-    const newEntry = { ...yearlyReport };
-    setData((prevData) => [...prevData, newEntry]);
-    setYearlyReport({
-      yearCategory: "",
-    });
 
-    //const updatedData hold the new yearly report data
-    const updatedData = [...data, newEntry];
-    localStorage.setItem("NewItems:", JSON.stringify(updatedData));
+    localStorage.setItem("year", value);
   }
-  
-  //arrow function that checks when user press the btn if the state of showPopUp is true
-  //if it is true, it will run the function and return popup
   const showPopup = () => setShowPopUp(!showPopUp);
-  console.log(yearlyReport);
+
+  function handleAdd() {
+    setShowPopUp(!showPopUp);
+
+
+  }
 
   return (
     <MDBContainer className="p-5">
@@ -75,7 +65,7 @@ function YearlyReport() {
               ></MDBBtn>
             </MDBModalHeader>
             <MDBModalBody>
-              <form>
+              <>
                 <select
                   id="form6Example1"
                   label="yearCategory"
@@ -98,11 +88,10 @@ function YearlyReport() {
                   <option value="2012">2012</option>
                 </select>
                 <button onClick={handleAdd}>Get Report</button>
-              </form>
+              </>
             </MDBModalBody>
             <MDBModalFooter>
-              {/* <MDBBtn color="secondary" onClick={showPopup} >
-              </MDBBtn> */}
+      
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>

@@ -24,7 +24,7 @@ function MonthlyReport() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const storedData = localStorage.getItem("NewItems:");
+    const storedData = localStorage.getItem("Monthly Report:");
 
     if (storedData) {
       setData(JSON.parse(storedData));
@@ -49,12 +49,12 @@ function MonthlyReport() {
     });
 
     const updatedData = [...data, newEntry];
-    localStorage.setItem("NewItems:", JSON.stringify(updatedData));
+    localStorage.setItem("Monthly Report:", JSON.stringify(updatedData));
   }
 
   //arrow function that checks when user press the btn if the state of showPopUp is true
   //if it is true, it will run the function and return popup
-
+console.log(monthlyReport);
   const showPopup = () => setShowPopUp(!showPopUp);
 
   return (
@@ -120,8 +120,19 @@ function MonthlyReport() {
               </form>
             </MDBModalBody>
             <MDBModalFooter>
-              {/* <MDBBtn color="secondary" onClick={showPopup} >
-            </MDBBtn> */}
+              {/* {
+              monthlyReport.map((entry, index) => {
+                return (
+                  <table>
+                    <tr><th>{entry.itemName}</th></tr>
+                    <tr><th>{entry.price}</th></tr>
+                    <tr><th>{entry.category}</th></tr>
+                    <tr><th>{entry.date}</th></tr>
+                    <tr><th>{entry.description}</th></tr>
+                  </table>
+                )
+              })
+             } */}
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>
